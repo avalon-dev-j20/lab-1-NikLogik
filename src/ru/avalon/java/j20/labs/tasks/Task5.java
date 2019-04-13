@@ -1,10 +1,15 @@
 package ru.avalon.java.j20.labs.tasks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import ru.avalon.java.j20.labs.Task;
 import ru.avalon.java.j20.labs.core.RandomArrayFactory;
 
 import java.util.List;
 import java.util.Set;
+import javafx.print.Collation;
 
 /**
  * Задание №5.
@@ -25,9 +30,16 @@ public class Task5 implements Task {
     public void run() {
         final int[] array = arrayFactory.getInstance(20);
 
-        List<Integer> list = null;
+        List<Integer> list = new ArrayList<>();
 
-        Set<Integer> set = null;
+        Set<Integer> set = new HashSet<>();
+        
+        for (Integer i : array) {
+            list.add(i);
+        }
+        
+        set.addAll(list);
+        
 
         /**
          * TODO(Студент): Выполните задание №5
