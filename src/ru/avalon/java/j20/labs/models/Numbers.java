@@ -6,7 +6,7 @@ public final class Numbers <T extends Number> {
      * Скрытый конструктор, чтобы предотвратить создание
      * экземпляров данного типа.
      */
-    private Numbers() {}
+    public Numbers() {}
 
     /**
      * Возвращает сумму значений переданного массиа.

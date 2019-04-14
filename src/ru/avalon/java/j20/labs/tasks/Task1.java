@@ -13,6 +13,7 @@ import ru.avalon.java.j20.labs.models.Numbers;
  * несколько методов, обобщённых с указанной точностью.
  */
 public class Task1 implements Task {
+    
 
     /**
      * Фабрика, создающая массивы случайных чисел.
