@@ -1,6 +1,9 @@
 package ru.avalon.java.j20.labs.models;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Модель получения последовательности чисел Фибоначчи.
@@ -17,13 +20,55 @@ import java.util.Iterator;
  * @see <a href="https://ru.wikipedia.org/wiki/%D0%A7%D0%B8%D1%81%D0%BB%D0%B0_%D0%A4%D0%B8%D0%B1%D0%BE%D0%BD%D0%B0%D1%87%D1%87%D0%B8">Числа Фибоначчи</a>
  */
 public class Fibonacci implements Iterable<Integer> {
+    
+    private int countSize;      //количестко чисел ряда
+    
+    private List<Integer> arrFibonacci; //массив для хранения чисел ряда
+    
+    public Fibonacci(){
+        
+    }
+
+    public Fibonacci(int countNums) {
+        this.countSize = countNums;
+        createArrFibonacci();
+    }
+
+    public Fibonacci(int countNums, List<Integer> arrFibonacci) {
+        this.countSize = countNums;
+        this.arrFibonacci = arrFibonacci;
+        createArrFibonacci();
+    }
+    
+    private void createArrFibonacci(){
+        if (countSize > 0) {
+            arrFibonacci = new ArrayList<>();
+            arrFibonacci.add(0, 0);
+            arrFibonacci.add(1, 1);
+            for(int i = 2; i<countSize; i++){
+                int currentNum = arrFibonacci.get(i-1) + arrFibonacci.get(i-2);
+                arrFibonacci.add(i, currentNum);    
+            }                    
+        } 
+    }
+    
+    public int getSumArrFibonacci(){
+        int summary = 0;
+        Iterator<Integer> it = arrFibonacci.iterator();
+        while (it.hasNext()){
+            summary += it.next();
+        }   
+        return summary;
+    }
 
     /**
      * Итератор, выполняющий обход последовательности
      * чисел Фибоначчи.
      */
-    private static class FibonacciIterator implements Iterator<Integer> {
-
+    private class FibonacciIterator implements Iterator<Integer> {
+        
+        int currentIndex;
+        
         /**
          * Определяет, есть ли следующее значение
          * последовательности чисел Фибоначчи.
@@ -34,7 +79,7 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public boolean hasNext() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            return currentIndex < countSize && arrFibonacci.get(currentIndex) != null;
         }
 
         /**
@@ -45,7 +90,9 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public Integer next() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            if(!hasNext())
+                throw new NoSuchElementException();
+            return arrFibonacci.get(currentIndex++);
         }
     }
 
